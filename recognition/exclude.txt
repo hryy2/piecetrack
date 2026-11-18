@@ -1,0 +1,6 @@
+# Cells to keep out of training, with the reason.
+# A3 lost her place around h/i on this sheet and wrote over the cells to
+# fix it: one holds two letters, the next holds the correction on top of
+# the mistake.  Neither is a sample of the character its cell is labelled.
+A3_2_068    # labelled h, contains "hi"
+A3_2_069    # labelled i, overwritten correction

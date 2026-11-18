@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>手写样本采集模板</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --label: #999;
+    --box: #c8c8c8;
+    --bg: #ffffff;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+
+  body {
+    margin: 0;
+    background: #e8e8e8;
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: var(--ink);
+  }
+
+  .screen-note {
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20px 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333;
+  }
+  .screen-note h1 { font-size: 19px; margin: 0 0 10px; }
+  .screen-note ul { margin: 8px 0; padding-left: 20px; }
+  .screen-note button {
+    margin-top: 12px;
+    padding: 10px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #1a1a1a;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .page {
+    width: 200mm;
+    height: 287mm;
+    padding: 12mm 14mm 14mm;
+    overflow: hidden;
+    margin: 0 auto 16px;
+    background: var(--bg);
+    position: relative;
+    page-break-after: always;
+  }
+
+  /* Corner fiducials for perspective correction.
+     Drawn as inline SVG rather than a background colour: browsers strip
+     background colours when printing, which silently removed these. */
+  .fid {
+    position: absolute;
+    width: 8mm;
+    height: 8mm;
+    line-height: 0;
+  }
+  .fid svg { width: 100%; height: 100%; display: block; }
+  .fid.tl { top: 6mm; left: 6mm; }
+  .fid.tr { top: 6mm; right: 6mm; }
+  .fid.bl { bottom: 6mm; left: 6mm; }
+  .fid.br { bottom: 6mm; right: 6mm; }
+
+  header {
+    margin: 4mm 0 4mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 0.4mm solid var(--ink);
+    padding-bottom: 2mm;
+  }
+  header h2 { font-size: 13pt; margin: 0; font-weight: 600; }
+  header .meta { font-size: 8.5pt; color: #444; }
+  header .meta span { display: inline-block; margin-left: 6mm; }
+  header .meta u { text-decoration: none; border-bottom: 0.3mm solid #666; padding: 0 5mm; }
+
+  .howto {
+    font-size: 8pt;
+    color: #555;
+    line-height: 1.55;
+    margin-bottom: 4mm;
+  }
+  .howto b { color: var(--ink); }
+
+  /* --- character grid --- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1.4mm;
+  }
+  .cell { text-align: center; }
+  .cell .tag {
+    font-size: 7pt;
+    color: var(--label);
+    line-height: 1.1;
+    margin-bottom: 0.8mm;
+    height: 3mm;
+  }
+  .cell .write {
+    height: 15mm;
+    border: 0.3mm solid var(--box);
+    border-radius: 0.8mm;
+  }
+  .grid.compact { gap: 1mm; }
+  .grid.compact .cell .write { height: 11mm; }
+  .group-head {
+    grid-column: 1 / -1;
+    font-size: 8pt;
+    color: #555;
+    font-weight: 600;
+    margin: 1.8mm 0 0.5mm;
+    padding-bottom: 0.6mm;
+    border-bottom: 0.2mm dotted #ccc;
+  }
+
+  /* --- line copying --- */
+  .lines { margin-top: 2mm; }
+  .line-item { margin-bottom: 3.6mm; }
+  .line-item .src {
+    font-size: 9pt;
+    color: var(--label);
+    margin-bottom: 1mm;
+    letter-spacing: 0.3mm;
+  }
+  .line-item .rule {
+    height: 11mm;
+    border: 0.3mm solid var(--box);
+    border-radius: 0.8mm;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 5mm;
+    left: 14mm;
+    right: 14mm;
+    font-size: 7pt;
+    color: #aaa;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media print {
+    body { background: #fff; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .screen-note { display: none; }
+    .page { margin: 0; box-shadow: none; }
+    @page { size: A4; margin: 5mm; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { }
+  }
+</style>
+</head>
+<body>
+
+<div class="screen-note">
+  <h1>手写样本采集模板</h1>
+  <p>用于训练手写识别模型的数据采集表，<b>一套四页</b>：中文单字、英文字母、中文整行、英文整行。请打印成 <b>A4 实际大小</b>（打印设置里不要勾选「适应页面」或缩放）。</p>
+  <ul>
+    <li>每位填写者填 <b>3–5 套</b>（每套四页），字迹保持自然，不用刻意工整</li>
+    <li>尽量找 <b>不同的人、不同的笔</b>（圆珠笔、中性笔、铅笔都要有）</li>
+    <li>四角的黑色方块不要涂改遮挡，程序靠它矫正照片</li>
+    <li>拍照时光线均匀，整页都在画面内，不要有阴影遮住格子</li>
+  </ul>
+  <button onclick="window.print()">打印</button>
+</div>
+
+<!-- ============ PAGE 1: isolated characters ============ -->
+<div class="page">
+  <div class="fid tl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid tr"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="0,0 10,0 10,10 5,10 5,5 0,5" fill="#000"/></svg></div>
+  <div class="fid bl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid br"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div>
+
+  <header>
+    <h2>手写样本采集 · 第 1 页（单字）</h2>
+    <div class="meta">
+      <span>填写人编号 <u></u></span>
+      <span>套号 <u></u></span>
+      <span>日期 <u></u></span>
+    </div>
+  </header>
+
+  <div class="howto">
+    请在每个方框内，<b>照着方框上方的灰色小字</b>写一个字，一格一个字。<b>用平时记账的自然字迹即可</b>，不需要写得特别工整——字迹越自然，训练出来的模型越贴近真实情况。
+  </div>
+
+  <div class="grid" id="grid1"></div>
+
+  <footer><span>手写计件识别项目 · 训练数据采集</span><span>P1</span></footer>
+</div>
+
+<!-- ============ PAGE 2: English letters ============ -->
+<div class="page">
+  <div class="fid tl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid tr"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="0,0 10,0 10,10 5,10 5,5 0,5" fill="#000"/></svg></div>
+  <div class="fid bl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid br"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div>
+
+  <header>
+    <h2>手写样本采集 · 第 2 页（英文字母）</h2>
+    <div class="meta">
+      <span>填写人编号 <u></u></span>
+      <span>套号 <u></u></span>
+      <span>日期 <u></u></span>
+    </div>
+  </header>
+
+  <div class="howto">
+    同样照着灰色小字写，一格一个字母。<b>注意区分大小写</b>（上半部分是大写，下半部分是小写）。按你平时写英文的习惯即可。
+  </div>
+
+  <div class="grid compact" id="grid2"></div>
+
+  <footer><span>手写计件识别项目 · 训练数据采集</span><span>P2</span></footer>
+</div>
+
+<!-- ============ PAGE 3: Chinese lines ============ -->
+<div class="page">
+  <div class="fid tl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid tr"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="0,0 10,0 10,10 5,10 5,5 0,5" fill="#000"/></svg></div>
+  <div class="fid bl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid br"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div>
+
+  <header>
+    <h2>手写样本采集 · 第 3 页（中文整行）</h2>
+    <div class="meta">
+      <span>填写人编号 <u></u></span>
+      <span>套号 <u></u></span>
+      <span>日期 <u></u></span>
+    </div>
+  </header>
+
+  <div class="howto">
+    请<b>照着每行上方的灰色文字</b>，在下方的长框里抄写一遍。<b>按平时记账的习惯写</b>，字之间的间距、标点、换行都按你自己的习惯来，不用对齐。
+  </div>
+
+  <div class="lines" id="lines"></div>
+
+  <footer><span>手写计件识别项目 · 训练数据采集</span><span>P3</span></footer>
+</div>
+
+<!-- ============ PAGE 4: English lines ============ -->
+<div class="page">
+  <div class="fid tl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid tr"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="0,0 10,0 10,10 5,10 5,5 0,5" fill="#000"/></svg></div>
+  <div class="fid bl"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div><div class="fid br"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0" y="0" width="10" height="10" fill="#000"/></svg></div>
+
+  <header>
+    <h2>手写样本采集 · 第 4 页（英文整行）</h2>
+    <div class="meta">
+      <span>填写人编号 <u></u></span>
+      <span>套号 <u></u></span>
+      <span>日期 <u></u></span>
+    </div>
+  </header>
+
+  <div class="howto">
+    照着每行上方的灰色英文，在下方长框里抄写一遍。<b>按平时写英文的习惯写</b>，单词之间留空格，不用刻意对齐。
+  </div>
+
+  <div class="lines" id="linesEn"></div>
+
+  <footer><span>手写计件识别项目 · 训练数据采集</span><span>P4</span></footer>
+</div>
+
+<script>
+  // 31 characters, grouped. Each is written 3 times.
+  const groups = [
+    { name: '数字', chars: ['0','1','2','3','4','5','6','7','8','9'] },
+    { name: '颜色', chars: ['黑','咖','黄','蓝','混','红','灰','绿','紫','白','粉','色'] },
+    { name: '单位', chars: ['套','方','条','个','张'] },
+    { name: '品类', chars: ['防','潮','垫','尘','罩','狗'] },
+    { name: '符号', chars: ['×','+','号'] },
+  ];
+  const REPEAT = 2;
+
+  const letters = s => s.split('');
+  const englishGroups = [
+    { name: '大写 A–Z', chars: letters('ABCDEFGHIJKLMNOPQRSTUVWXYZ') },
+    { name: '小写 a–z', chars: letters('abcdefghijklmnopqrstuvwxyz') },
+  ];
+
+  function fillGrid(el, groupList) {
+    groupList.forEach(g => {
+      const head = document.createElement('div');
+      head.className = 'group-head';
+      head.textContent = g.name;
+      el.appendChild(head);
+
+      g.chars.forEach(ch => {
+        for (let i = 0; i < REPEAT; i++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.innerHTML = '<div class="tag">' + ch + '</div><div class="write"></div>';
+          el.appendChild(cell);
+        }
+      });
+    });
+  }
+
+  fillGrid(document.getElementById('grid1'), groups);
+  fillGrid(document.getElementById('grid2'), englishGroups);
+
+  // Lines mirroring the real notebook formats, chosen to cover
+  // the × (dimension) vs + (addition) ambiguity, mixed units and multi-item rows.
+  const sampleLines = [
+    '7.29号 (80×1.9) 51个 防潮垫',
+    '7.30号 12×2米 = 48个 防潮垫',
+    '7.31号 100×1.9米 = 26个 + 26个 + 16个',
+    '7.26号 63套 + 6方 黄色',
+    '7.27号 (120×2.2) 32个 防尘罩',
+    '7.25号 14号(大) 5个 狗罩',
+    '3.11号 27条 + 90方 混色',
+    '黑色 120套',
+    '咖色 36套 + 蓝色 30套',
+    '3.25 80条 + 89条 蓝色',
+  ];
+
+  // English equivalents, covering the same ambiguities in the formats a
+  // New Zealand workshop would plausibly use.
+  const sampleLinesEn = [
+    '29 Jul  Dust Cover  51 pcs',
+    '30 Jul  12 x 2 m = 48 pcs  Moisture Mat',
+    '31 Jul  100 x 1.9 m = 26 + 26 + 16 pcs',
+    'Black 120 sets',
+    'Brown 36 sets + Blue 30 sets',
+    '26 Jul  63 sets + 6 pcs  Yellow',
+    'Dog Cover (L)  5 pcs',
+    '25 Mar  80 + 89 pcs  Blue',
+  ];
+
+  function fillLines(el, list) {
+    list.forEach(t => {
+      const item = document.createElement('div');
+      item.className = 'line-item';
+      item.innerHTML = '<div class="src">' + t + '</div><div class="rule"></div>';
+      el.appendChild(item);
+    });
+  }
+
+  fillLines(document.getElementById('lines'), sampleLines);
+  fillLines(document.getElementById('linesEn'), sampleLinesEn);
+</script>
+
+</body>
+</html>

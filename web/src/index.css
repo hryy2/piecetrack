@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --brand-600: #0B5FA5;  /* 主按钮、选中项、图标、头像 */
+  --brand-700: #0A4E88;  /* 悬停、链接文字 */
+  --brand-800: #083D6B;  /* 小标题 */
+  --brand-50:  #EAF2FD;  /* ready 标签底、选中行浅底 */
+
+  /* 语义色：只用于状态，严禁用于界面装饰 */
+  --status-paid:     #1A7F4B;
+  --status-paid-bg:  #E3F2E8;
+  --status-check:    #8A530E;
+  --status-check-bg: #FBF0DC;
+  --status-error:    #B4302A;
+  --status-idle:     #6B6862;
+  --status-idle-bg:  #F1F0EE;
+
+  /* 表面与状态描边 */
+  --surface-page:        #FBFBFA;
+  --status-check-border: #E5C695;
+  --status-check-ink:    #412402;
+  --status-check-hover:  #F7E7CD;
+  --status-paid-border:  #BBE0C8;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

@@ -1,0 +1,360 @@
+##### zh aug seed 1
+task zh: 36 classes
+  train  2016 crops   writers ['A0', 'A11', 'A12', 'A13', 'A15', 'A17', 'A18', 'A2', 'A3', 'A5', 'A7']
+  val     432 crops   writers ['A1', 'A16']
+  test    504 crops   writers ['A10', 'A14', 'A4']
+  model 292k parameters, augmentation on
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 3.635  val   2.8%   [  19s]
+  epoch   5  loss 3.420  val  10.4%   [  86s]
+  epoch  10  loss 2.783  val  28.7%   [ 168s]
+  epoch  15  loss 2.016  val  73.8%   [ 249s]
+  epoch  20  loss 1.542  val  82.2%   [ 335s]
+  epoch  25  loss 1.335  val  85.6%   [ 420s]
+  epoch  30  loss 1.218  val  94.7%   [ 503s]
+  epoch  35  loss 1.121  val  93.3%   [ 584s]
+  epoch  40  loss 1.090  val  97.0%   [ 666s]
+  epoch  45  loss 1.040  val  97.7%   [ 747s]
+  epoch  50  loss 1.000  val  98.1%   [ 826s]
+  epoch  55  loss 0.972  val  98.1%   [ 908s]
+  epoch  60  loss 0.998  val  97.7%   [ 988s]
+
+best val 98.1%
+TEST (unseen writers) 88.1%   n=504
+
+  per writer:
+    A4    85.6%  (n=216)
+    A10   89.6%  (n=144)
+    A14   90.3%  (n=144)
+
+  most confused (true -> predicted):
+    绿 -> 红   5
+    粉 -> 紫   4
+    垫 -> 尘   3
+    条 -> 尘   3
+    蓝 -> 尘   3
+    3 -> 7   2
+    3 -> 2   2
+    7 -> 1   2
+    号 -> 7   2
+    方 -> 号   2
+    紫 -> 尘   2
+    3 -> 9   1
+
+saved runs/zh_aug_s1.pt
+##### zh noaug seed 1
+task zh: 36 classes
+  train  2016 crops   writers ['A0', 'A11', 'A12', 'A13', 'A15', 'A17', 'A18', 'A2', 'A3', 'A5', 'A7']
+  val     432 crops   writers ['A1', 'A16']
+  test    504 crops   writers ['A10', 'A14', 'A4']
+  model 292k parameters, augmentation off
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 3.580  val   2.8%   [  17s]
+  epoch   5  loss 2.921  val  34.0%   [  82s]
+  epoch  10  loss 1.578  val  51.9%   [ 162s]
+  epoch  15  loss 0.762  val  76.9%   [ 242s]
+  epoch  20  loss 0.594  val  94.7%   [ 323s]
+  epoch  25  loss 0.517  val  97.0%   [ 401s]
+  epoch  30  loss 0.487  val  97.2%   [ 480s]
+  epoch  35  loss 0.473  val  94.0%   [ 558s]
+  epoch  40  loss 0.458  val  98.6%   [ 636s]
+  epoch  45  loss 0.448  val  99.3%   [ 714s]
+  epoch  50  loss 0.439  val  99.1%   [ 793s]
+  epoch  55  loss 0.438  val  99.3%   [ 870s]
+  epoch  60  loss 0.438  val  99.3%   [ 949s]
+
+best val 99.5%
+TEST (unseen writers) 92.5%   n=504
+
+  per writer:
+    A4    92.1%  (n=216)
+    A10   91.0%  (n=144)
+    A14   94.4%  (n=144)
+
+  most confused (true -> predicted):
+    3 -> 7   3
+    7 -> 1   2
+    红 -> 狗   2
+    罩 -> 尘   2
+    + -> 1   1
+    3 -> 1   1
+    4 -> 8   1
+    5 -> 6   1
+    9 -> 个   1
+    × -> 1   1
+    个 -> 9   1
+    个 -> 1   1
+
+saved runs/zh_noaug_s1.pt
+##### zh aug seed 2
+task zh: 36 classes
+  train  2016 crops   writers ['A0', 'A11', 'A12', 'A13', 'A15', 'A17', 'A18', 'A2', 'A3', 'A5', 'A7']
+  val     432 crops   writers ['A1', 'A16']
+  test    504 crops   writers ['A10', 'A14', 'A4']
+  model 292k parameters, augmentation on
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 3.643  val   2.8%   [  17s]
+  epoch   5  loss 3.410  val  17.8%   [  82s]
+  epoch  10  loss 2.718  val  43.1%   [ 162s]
+  epoch  15  loss 1.957  val  79.4%   [ 242s]
+  epoch  20  loss 1.538  val  84.5%   [ 321s]
+  epoch  25  loss 1.292  val  80.3%   [ 399s]
+  epoch  30  loss 1.165  val  89.8%   [ 482s]
+  epoch  35  loss 1.062  val  96.1%   [ 565s]
+  epoch  40  loss 1.017  val  95.8%   [ 647s]
+  epoch  45  loss 1.022  val  98.6%   [ 729s]
+  epoch  50  loss 0.975  val  98.4%   [ 811s]
+  epoch  55  loss 0.937  val  98.6%   [ 891s]
+  epoch  60  loss 0.978  val  98.6%   [ 974s]
+
+best val 98.6%
+TEST (unseen writers) 87.5%   n=504
+
+  per writer:
+    A4    88.4%  (n=216)
+    A10   84.7%  (n=144)
+    A14   88.9%  (n=144)
+
+  most confused (true -> predicted):
+    蓝 -> 尘   7
+    黄 -> 号   6
+    粉 -> 紫   5
+    绿 -> 红   4
+    3 -> 7   3
+    7 -> 1   2
+    垫 -> 尘   2
+    条 -> 紫   2
+    白 -> 色   2
+    红 -> 狗   2
+    蓝 -> 紫   2
+    0 -> 1   1
+
+saved runs/zh_aug_s2.pt
+##### zh noaug seed 2
+task zh: 36 classes
+  train  2016 crops   writers ['A0', 'A11', 'A12', 'A13', 'A15', 'A17', 'A18', 'A2', 'A3', 'A5', 'A7']
+  val     432 crops   writers ['A1', 'A16']
+  test    504 crops   writers ['A10', 'A14', 'A4']
+  model 292k parameters, augmentation off
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 3.589  val   4.4%   [  16s]
+  epoch   5  loss 2.909  val  36.1%   [  78s]
+  epoch  10  loss 1.595  val  49.5%   [ 160s]
+  epoch  15  loss 0.749  val  83.8%   [ 239s]
+  epoch  20  loss 0.573  val  83.1%   [ 319s]
+  epoch  25  loss 0.511  val  89.8%   [ 395s]
+  epoch  30  loss 0.489  val  97.2%   [ 475s]
+  epoch  35  loss 0.466  val  98.1%   [ 556s]
+  epoch  40  loss 0.457  val  99.3%   [ 637s]
+  epoch  45  loss 0.448  val  99.5%   [ 718s]
+  epoch  50  loss 0.437  val 100.0%   [ 793s]
+  epoch  55  loss 0.434  val 100.0%   [ 870s]
+  epoch  60  loss 0.435  val 100.0%   [ 947s]
+
+best val 100.0%
+TEST (unseen writers) 92.9%   n=504
+
+  per writer:
+    A4    92.6%  (n=216)
+    A10   93.8%  (n=144)
+    A14   92.4%  (n=144)
+
+  most confused (true -> predicted):
+    3 -> 7   2
+    7 -> 1   2
+    个 -> 4   2
+    套 -> 灰   2
+    方 -> 3   2
+    条 -> 黄   2
+    + -> 1   1
+    3 -> 9   1
+    3 -> 1   1
+    4 -> 8   1
+    个 -> 尘   1
+    个 -> 1   1
+
+saved runs/zh_noaug_s2.pt
+###ALLDONE###
+task zh: 36 classes
+  train  2016 crops   writers ['A0', 'A11', 'A12', 'A13', 'A15', 'A17', 'A18', 'A2', 'A3', 'A5', 'A7']
+  val     432 crops   writers ['A1', 'A16']
+  test    504 crops   writers ['A10', 'A14', 'A4']
+  model 292k parameters, augmentation off
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 3.579  val   5.3%   [  17s]
+  epoch   5  loss 2.951  val  31.2%   [  84s]
+  epoch  10  loss 1.594  val  69.7%   [ 167s]
+  epoch  15  loss 0.763  val  82.2%   [ 249s]
+  epoch  20  loss 0.567  val  85.9%   [ 332s]
+  epoch  25  loss 0.508  val  95.1%   [ 417s]
+  epoch  30  loss 0.496  val  84.3%   [ 497s]
+  epoch  35  loss 0.470  val  98.6%   [ 582s]
+  epoch  40  loss 0.456  val  98.6%   [ 666s]
+  epoch  45  loss 0.446  val  99.5%   [ 749s]
+  epoch  50  loss 0.442  val  99.3%   [ 828s]
+  epoch  55  loss 0.438  val  99.8%   [ 909s]
+  epoch  60  loss 0.436  val  99.8%   [ 991s]
+
+best val 99.8%
+TEST (unseen writers) 90.9%   n=504
+
+  per writer:
+    A4    87.5%  (n=216)
+    A10   93.8%  (n=144)
+    A14   93.1%  (n=144)
+
+  most confused (true -> predicted):
+    3 -> 7   6
+    7 -> 1   2
+    垫 -> 尘   2
+    条 -> 尘   2
+    紫 -> 8   2
+    紫 -> 尘   2
+    红 -> 方   2
+    罩 -> 尘   2
+    + -> 7   1
+    + -> 1   1
+    4 -> 8   1
+    5 -> 套   1
+
+saved runs/zh_noaug.pt
+###SPLIT###
+task en: 52 classes
+  train  2286 crops   writers ['A0', 'A10', 'A2', 'A3', 'A5', 'A6', 'A7', 'A8']
+  val     416 crops   writers ['A1']
+  test    520 crops   writers ['A4', 'A9']
+  model 294k parameters, augmentation on
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 4.020  val   1.9%   [  18s]
+  epoch   5  loss 3.825  val  11.8%   [  90s]
+  epoch  10  loss 3.078  val  37.0%   [ 184s]
+  epoch  15  loss 2.209  val  55.3%   [ 276s]
+  epoch  20  loss 1.765  val  76.0%   [ 366s]
+  epoch  25  loss 1.545  val  83.9%   [ 460s]
+  epoch  30  loss 1.416  val  77.6%   [ 556s]
+  epoch  35  loss 1.361  val  87.0%   [ 649s]
+  epoch  40  loss 1.301  val  89.9%   [ 743s]
+  epoch  45  loss 1.234  val  86.1%   [ 834s]
+  epoch  50  loss 1.197  val  87.0%   [ 928s]
+  epoch  55  loss 1.158  val  88.2%   [1018s]
+  epoch  60  loss 1.180  val  87.7%   [1106s]
+
+best val 89.9%
+TEST (unseen writers) 77.5%   n=520
+
+  per writer:
+    A4    75.6%  (n=312)
+    A9    80.3%  (n=208)
+
+  most confused (true -> predicted):
+    I -> l   4
+    P -> p   4
+    U -> V   4
+    r -> v   4
+    u -> v   4
+    C -> c   3
+    K -> k   3
+    V -> v   3
+    b -> L   3
+    w -> v   3
+    y -> x   3
+    D -> U   2
+
+saved runs/en_aug.pt
+###DONE###
+##### en NO-aug
+task en: 52 classes
+  train  2286 crops   writers ['A0', 'A10', 'A2', 'A3', 'A5', 'A6', 'A7', 'A8']
+  val     416 crops   writers ['A1']
+  test    520 crops   writers ['A4', 'A9']
+  model 294k parameters, augmentation off
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 3.987  val   1.9%   [  19s]
+  epoch   5  loss 3.463  val  26.4%   [  94s]
+  epoch  10  loss 2.038  val  43.3%   [ 187s]
+  epoch  15  loss 0.988  val  72.4%   [ 278s]
+  epoch  20  loss 0.740  val  84.6%   [ 370s]
+  epoch  25  loss 0.633  val  88.9%   [ 462s]
+  epoch  30  loss 0.597  val  81.5%   [ 553s]
+  epoch  35  loss 0.553  val  92.3%   [ 646s]
+  epoch  40  loss 0.539  val  87.7%   [ 741s]
+  epoch  45  loss 0.516  val  92.3%   [ 834s]
+  epoch  50  loss 0.506  val  92.8%   [ 929s]
+  epoch  55  loss 0.501  val  93.3%   [1026s]
+  epoch  60  loss 0.500  val  92.8%   [1119s]
+
+best val 93.3%
+TEST (unseen writers) 86.7%   n=520
+
+  per writer:
+    A4    83.0%  (n=312)
+    A9    92.3%  (n=208)
+
+  most confused (true -> predicted):
+    u -> v   6
+    I -> l   4
+    r -> n   3
+    A -> G   2
+    D -> O   2
+    E -> R   2
+    M -> r   2
+    U -> V   2
+    h -> b   2
+    j -> i   2
+    p -> R   2
+    A -> g   1
+
+saved runs/en_noaug.pt
+##### zh MILD-aug seed 0
+task zh: 36 classes
+  train  2016 crops   writers ['A0', 'A11', 'A12', 'A13', 'A15', 'A17', 'A18', 'A2', 'A3', 'A5', 'A7']
+  val     432 crops   writers ['A1', 'A16']
+  test    504 crops   writers ['A10', 'A14', 'A4']
+  model 292k parameters, augmentation mild
+
+  tot += float(loss) * len(yb)
+  epoch   1  loss 3.600  val   5.3%   [  16s]
+  epoch   5  loss 3.083  val  28.5%   [  86s]
+  epoch  10  loss 1.897  val  61.1%   [ 169s]
+  epoch  15  loss 0.978  val  85.6%   [ 250s]
+  epoch  20  loss 0.692  val  92.8%   [ 333s]
+  epoch  25  loss 0.615  val  98.4%   [ 416s]
+  epoch  30  loss 0.561  val  93.3%   [ 501s]
+  epoch  35  loss 0.529  val  98.1%   [ 584s]
+  epoch  40  loss 0.506  val  98.4%   [ 668s]
+  epoch  45  loss 0.491  val  98.4%   [ 751s]
+  epoch  50  loss 0.485  val  99.8%   [ 831s]
+  epoch  55  loss 0.478  val  99.8%   [ 916s]
+  epoch  60  loss 0.475  val  99.8%   [ 997s]
+
+best val 99.8%
+TEST (unseen writers) 93.1%   n=504
+
+  per writer:
+    A4    91.7%  (n=216)
+    A10   95.8%  (n=144)
+    A14   92.4%  (n=144)
+
+  most confused (true -> predicted):
+    3 -> 7   3
+    7 -> 1   2
+    8 -> 6   2
+    8 -> 0   2
+    个 -> 4   2
+    灰 -> 方   2
+    红 -> 狗   2
+    2 -> 0   1
+    3 -> 方   1
+    3 -> 1   1
+    5 -> 9   1
+    7 -> 9   1
+
+saved runs/zh_mild.pt
+###ALLDONE###
